@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="description" content="Turn any public Letterboxd watchlist into a free Nuvio/Stremio movie catalog, without logging in.">
+  <meta name="theme-color" content="#0c1220">
+  <title>Letterboxd Watchlist · Nuvio Add-on</title>
+  <link rel="stylesheet" href="/app.css">
+  <script src="/app.js" defer></script>
+</head>
+<body>
+  <main class="wrapper">
+    <div class="eyebrow"><span class="live-dot" aria-hidden="true"></span> Open source · Self-hostable · Free to use</div>
+    <h1>Your watchlist.<br><span>In your movie catalog.</span></h1>
+    <p class="intro">Add films from a public Letterboxd watchlist to Nuvio or another Stremio-compatible app. No API key, subscription or account sign-in required here.</p>
+    <section class="panel" aria-labelledby="setup-title">
+      <div class="panel-top"><span class="number">01</span><h2 id="setup-title">Choose a Letterboxd account</h2></div>
+      <form id="generator" novalidate>
+        <label for="account">Letterboxd username or public watchlist URL</label>
+        <div class="input-row">
+          <input id="account" name="account" inputmode="url" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="e.g. filmfan" required maxlength="220">
+          <button class="primary" type="submit">Get add-on link</button>
+        </div>
+        <p id="error" class="error" role="alert" hidden></p>
+      </form>
+      <div id="result" class="result" hidden aria-live="polite">
+        <p class="success">Your manifest URL is ready.</p>
+        <label for="manifest-url">Copy this URL into Nuvio → Addons → Add by URL</label>
+        <div class="input-row result-row">
+          <input id="manifest-url" readonly aria-label="Generated add-on manifest URL">
+          <button id="copy" class="secondary" type="button">Copy</button>
+        </div>
+        <p class="result-links"><a id="view-manifest" href="#" target="_blank" rel="noopener noreferrer">View manifest ↗</a> <span aria-hidden="true">·</span> <a id="view-watchlist" href="#" target="_blank" rel="noopener noreferrer">View public watchlist ↗</a></p>
+      </div>
+    </section>
+    <section class="steps" aria-labelledby="hosting-title">
+      <div class="panel-top"><span class="number" aria-hidden="true">⌘</span><h2 id="hosting-title">Want to run your own copy?</h2></div>
+      <p class="host-note">No paid API or hosted account is needed to run this software. Download the GitHub source, install Node.js 20+, open a terminal in the project folder and run:</p>
+      <p class="command"><code>npm start</code></p>
+      <p class="host-note">Then visit <code>http://localhost:3000</code>. The server must stay running. <strong>A local server is not publicly accessible</strong>: for Nuvio on another device or for clients requiring HTTPS, deploy your own copy to a public HTTPS host. Render is an optional self-deployment choice; see the repository README. The repository maintainer does not provide a hosted service.</p>
+    </section>
+    <section class="steps" aria-labelledby="steps-title">
+      <div class="panel-top"><span class="number">02</span><h2 id="steps-title">Install in Nuvio</h2></div>
+      <ol>
+        <li>Enter a public Letterboxd username above.</li>
+        <li>Copy the generated <code>manifest.json</code> link.</li>
+        <li>In Nuvio, open <strong>Addons</strong> and add an addon using a URL.</li>
+        <li>Find <strong>Letterboxd Watchlist</strong> in your catalogs.</li>
+      </ol>
+    </section>
+    <div class="notes">
+      <p><strong>What is shared?</strong> Only publicly available watchlist movie information. This page has no analytics, cookies, passwords or user database. Your public username is included in the URL you install, so the add-on host and your app can see it.</p>
+      <p><strong>What about playback?</strong> This is a movie catalog, not a streaming provider. Available playback depends on your other add-ons. Some films may lack compatible IMDb IDs.</p>
+      <p><strong>Why might it be slow?</strong> New watchlists need film ID lookups. Letterboxd may also temporarily block automated requests, and free web hosts can go to sleep.</p>
+    </div>
+    <footer>Independent community project. Not affiliated with Letterboxd, Nuvio, Stremio, IMDb or TMDB.</footer>
+  </main>
+</body>
+</html>
